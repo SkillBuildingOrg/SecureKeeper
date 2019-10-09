@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menuBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/theme_menubar_background"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/menuBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/menuBarAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_menu_bar"
+            android:clickable="true"
+            android:contentDescription="@string/button_ok"
+            android:padding="10dip"
+            android:src="@drawable/menu_bar_all" />
+
+        <ImageView
+            android:id="@+id/menuBarPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_menu_bar"
+            android:clickable="true"
+            android:contentDescription="@string/button_ok"
+            android:padding="10dip"
+            android:src="@drawable/menu_bar_personal" />
+
+        <ImageView
+            android:id="@+id/menuBarProfessional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_menu_bar"
+            android:clickable="true"
+            android:contentDescription="@string/button_ok"
+            android:padding="10dip"
+            android:src="@drawable/menu_bar_professional" />
+
+        <ImageView
+            android:id="@+id/menuBarSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_menu_bar"
+            android:clickable="true"
+            android:contentDescription="@string/button_ok"
+            android:padding="10dip"
+            android:src="@drawable/menu_bar_search" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/separator_color" />
+
+</LinearLayout>

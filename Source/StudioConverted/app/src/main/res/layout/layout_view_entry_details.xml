@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/floatingContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:id="@+id/scrollContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:id="@+id/mainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dip" >
+
+            <TextView
+                android:id="@+id/viewTitleText"
+                style="@style/text_large_italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingBottom="4dip"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/categoryDescriptionText"
+                style="@style/text_small_italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingBottom="7dip"
+                android:singleLine="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
+                android:layerType="software" />
+
+            <TextView
+                android:id="@+id/lastUpdatedLabel"
+                style="@style/text_small_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingBottom="5dip"
+                android:paddingTop="5dip"
+                android:singleLine="true"
+                android:text="@string/text_last_updated" />
+
+            <TextView
+                android:id="@+id/viewLastUpdatedText"
+                style="@style/text_small_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingBottom="7dip"
+                android:singleLine="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
+                android:layerType="software" />
+
+            <TextView
+                android:id="@+id/descriptionLabel"
+                style="@style/text_small_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingBottom="5dip"
+                android:paddingTop="25dip"
+                android:singleLine="true"
+                android:text="@string/text_description" />
+
+            <TextView
+                android:id="@+id/viewDescriptionText"
+                style="@style/text_medium_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingBottom="7dip"
+                android:singleLine="false"
+                android:text="@string/text_label_no_description"
+                android:textStyle="italic" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
+                android:layerType="software" />
+
+            <TextView
+                android:id="@+id/additionalInfoTextView"
+                style="@style/text_medium_bold_italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingTop="25dip"
+                android:singleLine="true"
+                android:text="@string/text_label_enter_additional_info" />
+
+            <LinearLayout
+                android:id="@+id/viewKeyValueListContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dip"
+                android:visibility="visible" >
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonViewSecreteKey"
+                style="@style/text_small_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="15dip"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:text="@string/button_view_secrete_key"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/secreteContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dip"
+                android:paddingTop="15dip"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/secreteTextLabel"
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:singleLine="true"
+                    android:text="@string/text_secrete_key" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/background_dark"
+                    android:orientation="vertical"
+                    android:padding="1dip" >
+
+                    <TextView
+                        android:id="@+id/viewSecreteKeyText"
+                        style="@style/text_medium_normal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:padding="5dip"
+                        android:singleLine="false"
+                        android:text="@string/text_label_no_passcode" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
+                android:layerType="software" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/showMenuIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/menu_options"
+        android:visibility="gone" />
+
+</RelativeLayout>

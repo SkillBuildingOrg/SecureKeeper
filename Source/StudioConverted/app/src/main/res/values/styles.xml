@@ -1,0 +1,61 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar"></style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:configChanges">keyboardHidden|orientation</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="text_large_italic">
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_medium_bold">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_medium_normal">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="text_medium_italic">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="text_medium_bold_italic">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <style name="text_small_normal">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="text_small_italic">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="text_small_bold">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

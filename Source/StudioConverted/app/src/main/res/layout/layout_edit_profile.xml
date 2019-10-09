@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:id="@+id/profileContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:id="@+id/scrollContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:padding="15dip" >
+
+            <TextView
+                android:id="@+id/lebal_profile_setup"
+                style="@style/text_medium_bold_italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingBottom="15dip"
+                android:singleLine="true"
+                android:text="@string/text_label_profile_setup_title" />
+
+            <LinearLayout
+                android:id="@+id/profileInfoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_name" />
+
+                <EditText
+                    android:id="@+id/enterProfileUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_required"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLength="25"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_surname" />
+
+                <EditText
+                    android:id="@+id/enterProfileUserSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_optional"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLength="25"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_email_id" />
+
+                <EditText
+                    android:id="@+id/enterProfileUserEmailId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_required"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_phone_number" />
+
+                <EditText
+                    android:id="@+id/enterProfilePhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_required"
+                    android:inputType="phone"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+
+                <TextView
+                    style="@style/text_small_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:padding="5dip"
+                    android:text="@string/alert_info_valid_phone"
+                    android:textSize="12sp" />
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_alt_phone_number" />
+
+                <EditText
+                    android:id="@+id/enterProfileAlternatePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_optional"
+                    android:inputType="phone"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profileLocationContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_city" />
+
+                <EditText
+                    android:id="@+id/enterProfileCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_optional"
+                    android:inputType="textCapWords|textPostalAddress"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_state" />
+
+                <EditText
+                    android:id="@+id/enterProfileState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_optional"
+                    android:inputType="textCapWords|textPostalAddress"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_country" />
+
+                <EditText
+                    android:id="@+id/enterProfileCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_optional"
+                    android:inputType="textCapWords|textPostalAddress"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonSaveProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/button_save"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"
+                android:visibility="visible" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/showMenuIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/menu_options"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:id="@+id/recoveryScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:id="@+id/scrollContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dip" >
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                style="@style/text_medium_italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingBottom="5dip"
+                android:paddingLeft="2dip"
+                android:paddingTop="1dip"
+                android:singleLine="false"
+                android:text="@string/text_recovery_description_editmode" />
+
+            <LinearLayout
+                android:id="@+id/question1Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/defaultQuestion1"
+                    style="@style/text_small_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingLeft="2dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="false"
+                    android:text="@string/text_recovery_question1" />
+
+                <EditText
+                    android:id="@+id/enterAnswer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_answer"
+                    android:inputType="text|textVisiblePassword"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/question2Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/defaultQuestion2"
+                    style="@style/text_small_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingLeft="2dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="false"
+                    android:text="@string/text_recovery_question2" />
+
+                <EditText
+                    android:id="@+id/enterAnswer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_answer"
+                    android:inputType="text|textVisiblePassword"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/question3Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/defaultQuestion3"
+                    style="@style/text_small_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingLeft="2dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="false"
+                    android:text="@string/text_recovery_question3" />
+
+                <EditText
+                    android:id="@+id/enterAnswer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_required"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/question4Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/defaultQuestion4"
+                    style="@style/text_small_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingBottom="5dip"
+                    android:paddingLeft="2dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="false"
+                    android:text="@string/text_recovery_question4" />
+
+                <EditText
+                    android:id="@+id/enterAnswer4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hint_required"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
+                </EditText>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonSubmitAnswers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/button_submit_answers"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/menu_options"
+        android:visibility="invisible" />
+
+</RelativeLayout>

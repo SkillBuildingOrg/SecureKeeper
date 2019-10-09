@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="entryCategoryList">
+        <item>@string/spinner_personal</item>
+        <item>@string/spinner_professional</item>
+    </string-array>
+    <string-array name="entrySubtypeList">
+        <item>@string/spinner_others</item>
+        <item>@string/spinner_banking</item>
+        <item>@string/spinner_email</item>
+        <item>@string/spinner_social</item>
+        <item>@string/spinner_private</item>
+        <item>@string/spinner_phone</item>
+    </string-array>
+    <string-array name="searchEntryCategoryList">
+        <item>@string/spinner_all</item>
+        <item>@string/spinner_personal</item>
+        <item>@string/spinner_professional</item>
+    </string-array>
+    <string-array name="searchEntrySubtypeList">
+        <item>@string/spinner_all</item>
+        <item>@string/spinner_others</item>
+        <item>@string/spinner_banking</item>
+        <item>@string/spinner_email</item>
+        <item>@string/spinner_social</item>
+        <item>@string/spinner_private</item>
+        <item>@string/spinner_phone</item>
+    </string-array>
+
+</resources>

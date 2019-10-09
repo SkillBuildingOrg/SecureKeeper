@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dip" >
+
+    <EditText
+        android:id="@+id/enterSearchTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:gravity="left|center_vertical"
+        android:hint="@string/hint_search_text"
+        android:inputType="textCapWords|textVisiblePassword"
+        android:maxLength="25"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceSmall" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/setFilterslabel"
+        style="@style/text_small_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enterSearchTextInput"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:paddingBottom="5dip"
+        android:paddingTop="10dip"
+        android:singleLine="true"
+        android:text="@string/spinner_set_filter" />
+
+    <LinearLayout
+        android:id="@+id/filterContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setFilterslabel"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/spinnerEntryCategory"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:entries="@array/searchEntryCategoryList"
+            android:prompt="@string/spinner_prompt" >
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/spinnerEntrySubtype"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:entries="@array/searchEntrySubtypeList"
+            android:prompt="@string/spinner_prompt" >
+        </Spinner>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/entryListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/filterContainer"
+        android:divider="@color/list_separator_color"
+        android:dividerHeight="0.5dip"
+        android:visibility="visible" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/noRecordsFoundText"
+        style="@style/text_medium_bold"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/filterContainer"
+        android:gravity="center"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:text="@string/text_label_no_record_found"
+        android:textSize="17sp"
+        android:textStyle="italic"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/menu_options"
+        android:visibility="invisible" />
+
+</RelativeLayout>

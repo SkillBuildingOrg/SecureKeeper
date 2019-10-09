@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/text_medium_bold_italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingBottom="10dip"
+        android:singleLine="true"
+        android:text="@string/app_name" />
+
+    <TextView
+        android:id="@+id/appVersionInfo"
+        style="@style/text_small_italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingBottom="10dip"
+        android:singleLine="true"
+        android:text="@string/app_name" />
+
+    <ImageView
+        android:id="@+id/imageInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
+        android:padding="15dip"
+        android:src="@drawable/main_locker" />
+
+    <TextView
+        style="@style/text_small_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dip"
+        android:paddingTop="15dip"
+        android:singleLine="false"
+        android:text="@string/text_about_us_description" />
+
+    <TextView
+        android:id="@+id/ratingLinkText"
+        style="@style/text_small_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip"
+        android:paddingTop="15dip"
+        android:singleLine="false"
+        android:text="@string/text_rate_this_app_link"
+        android:textColor="@color/link_text_color" />
+
+    <TextView
+        android:id="@+id/policyLinkText"
+        style="@style/text_small_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip"
+        android:paddingTop="20dip"
+        android:singleLine="false"
+        android:text="@string/text_policy_and_licenses_link"
+        android:textColor="@color/link_text_color" />
+
+</LinearLayout>

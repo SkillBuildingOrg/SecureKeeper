@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="default_text_color">#002233</color>
+    <color name="page_header_text_color">#FFFFFF</color>
+    <color name="theme_bg_color">#FF9900</color>
+    <color name="theme_page_bg_color">#F4FFF9</color>
+    <color name="theme_header_background">#074B7E</color>
+    <color name="theme_menubar_background">#FFFFFF</color>
+    <color name="splash_background">#FF9900</color>
+    <color name="separator_color">#FFAF32</color>
+    <color name="list_separator_color">#787058</color>
+    <color name="title_background">#86959E</color>
+    <color name="toast_background">#074B7E</color>
+    <color name="link_text_color">#005580</color>
+    <color name="text_shadow">#7F000000</color>
+    <color name="text_shadow_white">#FFFFFF</color>
+    <color name="text_error_msg">#9A162C</color>
+    <color name="list_item_bg_color">#F2F2F2</color>
+    <color name="alphabet_a">#0000FF</color>
+    <color name="alphabet_b">#00CC00</color>
+    <color name="alphabet_c">#008B8B</color>
+    <color name="alphabet_d">#00BFFF</color>
+    <color name="alphabet_e">#00FF7F</color>
+    <color name="alphabet_f">#228B22</color>
+    <color name="alphabet_g">#48D1CC</color>
+    <color name="alphabet_h">#556B2F</color>
+    <color name="alphabet_i">#5F9EA0</color>
+    <color name="alphabet_j">#66CDAA</color>
+    <color name="alphabet_k">#696969</color>
+    <color name="alphabet_l">#8B4513</color>
+    <color name="alphabet_m">#9370DB</color>
+    <color name="alphabet_n">#A0522D</color>
+    <color name="alphabet_o">#B8860B</color>
+    <color name="alphabet_p">#BC8F8F</color>
+    <color name="alphabet_q">#BDB76B</color>
+    <color name="alphabet_r">#CD5C5C</color>
+    <color name="alphabet_s">#DB7093</color>
+    <color name="alphabet_t">#FF1493</color>
+    <color name="alphabet_u">#FA8072</color>
+    <color name="alphabet_v">#FF4500</color>
+    <color name="alphabet_w">#FF8C00</color>
+    <color name="alphabet_x">#804000</color>
+    <color name="alphabet_y">#E6FF99</color>
+    <color name="alphabet_z">#997366</color>
+    <color name="alphabet_1">#A6A659</color>
+    <color name="alphabet_2">#FF3333</color>
+    <color name="alphabet_3">#E6E600</color>
+    <color name="alphabet_4">#CC00CC</color>
+    <color name="alphabet_5">#33CCFF</color>
+    <color name="alphabet_6">#BFBFBF</color>
+    <color name="alphabet_7">#220066</color>
+    <color name="alphabet_8">#FF4F4D</color>
+    <color name="alphabet_9">#606060</color>
+    <color name="alphabet_0">#80FF00</color>
+
+</resources>
