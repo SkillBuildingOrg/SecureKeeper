@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/screenContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:id="@+id/profileContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:id="@+id/scrollContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/userInfoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/theme_bg_color"
+                android:orientation="vertical"
+                android:padding="15dip" >
+
+                <TextView
+                    android:id="@+id/userNameTextView"
+                    style="@style/text_large_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="10dip"
+                    android:paddingTop="25dip"
+                    android:singleLine="false"
+                    android:text="@string/text_label_no_data_set"
+                    android:textColor="@color/page_header_text_color"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:id="@+id/locationTextView"
+                    style="@style/text_medium_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="20dip"
+                    android:singleLine="false"
+                    android:text="@string/text_label_no_data_set"
+                    android:textColor="@color/page_header_text_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dateContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dip" >
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="10dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_phone_number"
+                    android:textColor="@color/link_text_color" />
+
+                <TextView
+                    android:id="@+id/userPhoneNumber"
+                    style="@style/text_medium_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="20dip"
+                    android:singleLine="true"
+                    android:text="@string/text_label_no_data_set"
+                    android:textColor="@android:color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dip"
+                    android:background="@color/separator_color"
+                    android:layerType="software" />
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="10dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_alt_phone_number"
+                    android:textColor="@color/link_text_color" />
+
+                <TextView
+                    android:id="@+id/alternatePhoneNumber"
+                    style="@style/text_medium_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="20dip"
+                    android:singleLine="true"
+                    android:text="@string/text_label_no_data_set"
+                    android:textColor="@android:color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dip"
+                    android:background="@color/separator_color"
+                    android:layerType="software" />
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="10dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_profile_email_id"
+                    android:textColor="@color/link_text_color" />
+
+                <TextView
+                    android:id="@+id/userEmailId"
+                    style="@style/text_medium_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="20dip"
+                    android:singleLine="true"
+                    android:text="@string/text_label_no_data_set"
+                    android:textColor="@android:color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dip"
+                    android:background="@color/separator_color"
+                    android:layerType="software" />
+
+                <TextView
+                    style="@style/text_small_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:paddingBottom="10dip"
+                    android:paddingTop="15dip"
+                    android:singleLine="true"
+                    android:text="@string/text_app_password"
+                    android:textColor="@color/link_text_color" />
+
+                <Button
+                    android:id="@+id/buttonChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:text="@string/button_change_password"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="italic" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/editProfileIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/app_name"
+        android:paddingRight="20dip"
+        android:paddingTop="10dip"
+        android:src="@drawable/edit_profile" />
+
+</RelativeLayout>

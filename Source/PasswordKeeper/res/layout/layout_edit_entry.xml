@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollContainerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/pageTitleTextView"
+            style="@style/text_medium_bold_italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:paddingBottom="15dip"
+            android:singleLine="true"
+            android:text="@string/text_label_record_details" />
+
+        <TextView
+            style="@style/text_small_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:paddingBottom="5dip"
+            android:singleLine="true"
+            android:text="@string/spinner_label_select_category" />
+
+        <LinearLayout
+            android:id="@+id/filterContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/spinnerEntryCategory"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:entries="@array/entryCategoryList"
+                android:prompt="@string/spinner_prompt" >
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/spinnerEntrySubtype"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:entries="@array/entrySubtypeList"
+                android:prompt="@string/spinner_prompt" >
+            </Spinner>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/titleTextView"
+            style="@style/text_small_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
+            android:singleLine="true"
+            android:text="@string/text_label_enter_title" />
+
+        <EditText
+            android:id="@+id/enterEntryTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="left|center_vertical"
+            android:hint="@string/hint_enter_title"
+            android:inputType="textCapWords|textNoSuggestions"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/passcodeTextView"
+            style="@style/text_small_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:paddingBottom="5dip"
+            android:paddingTop="15dip"
+            android:singleLine="true"
+            android:text="@string/text_label_enter_passcode" />
+
+        <EditText
+            android:id="@+id/enterEntryPasscode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="left|center_vertical"
+            android:hint="@string/hint_enter_passcode"
+            android:inputType="textVisiblePassword"
+            android:maxLength="25"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/additionalInfoTextView"
+            style="@style/text_small_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:paddingTop="15dip"
+            android:singleLine="true"
+            android:text="@string/text_label_enter_additional_info" />
+
+        <LinearLayout
+            android:id="@+id/keyValueListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible" >
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnTextAddMoreInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:text="@string/button_add_more"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            style="@style/text_small_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:paddingBottom="5dip"
+            android:paddingTop="15dip"
+            android:singleLine="true"
+            android:text="@string/text_label_enter_description" />
+
+        <EditText
+            android:id="@+id/enterDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="top|left"
+            android:hint="@string/hint_enter_description"
+            android:inputType="textCapSentences|textMultiLine|textNoSuggestions"
+            android:maxLength="100"
+            android:minLines="3"
+            android:singleLine="false"
+            android:textAppearance="?android:attr/textAppearanceSmall" >
+        </EditText>
+
+        <Button
+            android:id="@+id/buttonSaveEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="@string/button_save"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</ScrollView>

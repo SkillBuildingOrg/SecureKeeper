@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <color name="default_text_color">#002233</color>
+    <color name="page_header_text_color">#FFFFFF</color>
+    <color name="theme_bg_color">#F77324</color>
+    <color name="theme_header_background">#074B7E</color>
+    <color name="theme_menubar_background">#FFFFFF</color>
+    <color name="splash_background">#F68B1F</color>
+    <color name="separator_color">#BFC7C8</color>
+    <color name="title_background">#86959E</color>
+    <color name="toast_background">#00D150</color>
+    <color name="link_text_color">#005580</color>
+    <color name="text_shadow">#7F000000</color>
+    <color name="text_shadow_white">#FFFFFF</color>
+
+</resources>
