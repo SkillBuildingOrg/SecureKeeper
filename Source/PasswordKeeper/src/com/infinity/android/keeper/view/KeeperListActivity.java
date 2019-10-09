@@ -15,10 +15,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +35,7 @@ import com.infinity.android.keeper.BaseKeeperActivity;
 import com.infinity.android.keeper.R;
 import com.infinity.android.keeper.adaptors.EntryAdapter;
 import com.infinity.android.keeper.data.model.KeeperEntry;
+import com.infinity.android.keeper.data.model.ProfileInfo;
 import com.infinity.android.keeper.data.model.utils.EntryType;
 import com.infinity.android.keeper.manager.KeeperManager;
 import com.infinity.android.keeper.manager.UpdateManager;
@@ -48,10 +48,9 @@ import com.infinity.android.keeper.utils.TextFileHelper;
  * @author joshiroh
  */
 public final class KeeperListActivity extends BaseKeeperActivity {
-    private static final int MENU_VIEW_PROFILE = 101;
     private static final int MENU_EXPORT_DATA = 102;
     private static final int MENU_IMPORT_DATA = 103;
-    private static final int MENU_ABOUT_APP = 105;
+    private static final int MENU_UPDATE_RECOVERY = 104;
 
     private EntryAdapter entryAdapter;
     private ListView entryListView;
@@ -63,19 +62,14 @@ public final class KeeperListActivity extends BaseKeeperActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_keeper_list);
-
+        KeeperManager.getInstance().deleteResetToken();
         importedFilePath = getIntent().getStringExtra(FileBrowserActivity.EXTRA_FILE_PATH);
 
-        /*
-         * Initialize page header
-         */
-        final View headerView = KeeperUtils.getPageTitleView(appContext, getString(R.string.page_entry_list));
-        addPageHeaderView(headerView);
-        final LinearLayout headerMenuContainer = (LinearLayout)headerView.findViewById(R.id.headerMenuContainer);
-        final ImageView addNewImage = KeeperUtils.getHeaderMenuImage(appContext, R.drawable.menu_add);
-        final ImageView menuOptionsImage = KeeperUtils.getHeaderMenuImage(appContext, R.drawable.menu_options);
-        headerMenuContainer.addView(addNewImage);
-        headerMenuContainer.addView(menuOptionsImage);
+        final View pageMenuBar = KeeperUtils.getDefaultMenuBarView(appContext);
+        initializePageMenuBar(pageMenuBar);
+        addPageMenuBarLayout(pageMenuBar);
+
+        final ImageView addNewImage = (ImageView)findViewById(R.id.addNewEntryButton);
         addNewImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -86,20 +80,8 @@ public final class KeeperListActivity extends BaseKeeperActivity {
             }
         });
 
-        menuOptionsImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                KeeperUtils.hideKeyboard(appContext, v);
-                openContextMenu(v);
-            }
-        });
-        registerForContextMenu(menuOptionsImage);
-
-        final View pageMenuBar = KeeperUtils.getDefaultMenuBarView(appContext);
-        initializePageMenuBar(pageMenuBar);
-        addPageMenuBarLayout(pageMenuBar);
-
         entryListView = (ListView)findViewById(R.id.entryListView);
+
         keeperEntryList = UpdateManager.getInstance().getStoredEntries(null);
         entryAdapter = new EntryAdapter(this, keeperEntryList);
         entryListView.setAdapter(entryAdapter);
@@ -116,10 +98,17 @@ public final class KeeperListActivity extends BaseKeeperActivity {
                 }
             }
         });
-        initializeEntryList(keeperEntryList);
-        if(!Strings.isNullOrEmpty(importedFilePath)) {
+        initializeEntryList(null);
+        if (!Strings.isNullOrEmpty(importedFilePath)) {
             initiateDataImport(importedFilePath);
         }
+
+        ProfileInfo info = UpdateManager.getInstance().getProfileInformation();
+        if (null != info && null == info.getSecurityQuestions()) {
+            KeeperUtils.showAlertForRecoveryOptions(appContext);
+        }
+
+        KeeperUtils.initActionBar(appContext, R.string.page_entry_list, true);
     }
 
     /**
@@ -136,7 +125,7 @@ public final class KeeperListActivity extends BaseKeeperActivity {
         allCategoryMenu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                initializeEntryList(UpdateManager.getInstance().getStoredEntries(null));
+                initializeEntryList(null);
                 setSelectedMenuBarId(R.id.menuBarAll);
             }
         });
@@ -144,7 +133,7 @@ public final class KeeperListActivity extends BaseKeeperActivity {
         personalCategoryMenu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                initializeEntryList(UpdateManager.getInstance().getStoredEntries(EntryType.PERSONAL));
+                initializeEntryList(EntryType.PERSONAL);
                 setSelectedMenuBarId(R.id.menuBarPersonal);
             }
         });
@@ -152,7 +141,7 @@ public final class KeeperListActivity extends BaseKeeperActivity {
         professionalCategoryMenu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                initializeEntryList(UpdateManager.getInstance().getStoredEntries(EntryType.PROFESSIONAL));
+                initializeEntryList(EntryType.PROFESSIONAL);
                 setSelectedMenuBarId(R.id.menuBarProfessional);
             }
         });
@@ -175,35 +164,36 @@ public final class KeeperListActivity extends BaseKeeperActivity {
 
     /**
      * Set selected menu bar ID indicator
+     * 
      * @param selectedId
      */
     private void setSelectedMenuBarId(final int selectedId) {
-        if(null != menuBarImageList && !menuBarImageList.isEmpty()) {
-            for(ImageView view : menuBarImageList) {
+        if (null != menuBarImageList && !menuBarImageList.isEmpty()) {
+            for (ImageView view : menuBarImageList) {
                 switch (view.getId()) {
                     case R.id.menuBarAll:
-                        if(view.getId() == selectedId) {
+                        if (view.getId() == selectedId) {
                             view.setImageResource(R.drawable.menu_bar_all_selected);
                         } else {
                             view.setImageResource(R.drawable.menu_bar_all);
                         }
                         break;
                     case R.id.menuBarPersonal:
-                        if(view.getId() == selectedId) {
+                        if (view.getId() == selectedId) {
                             view.setImageResource(R.drawable.menu_bar_personal_selected);
                         } else {
                             view.setImageResource(R.drawable.menu_bar_personal);
                         }
                         break;
                     case R.id.menuBarProfessional:
-                        if(view.getId() == selectedId) {
+                        if (view.getId() == selectedId) {
                             view.setImageResource(R.drawable.menu_bar_professional_selected);
                         } else {
                             view.setImageResource(R.drawable.menu_bar_professional);
                         }
                         break;
                     case R.id.menuBarSearch:
-                        if(view.getId() == selectedId) {
+                        if (view.getId() == selectedId) {
                             view.setImageResource(R.drawable.menu_bar_search_selected);
                         } else {
                             view.setImageResource(R.drawable.menu_bar_search);
@@ -220,13 +210,12 @@ public final class KeeperListActivity extends BaseKeeperActivity {
      * 
      * @param recordList
      */
-    private void initializeEntryList(final List<KeeperEntry> recordList) {
+    private void initializeEntryList(final EntryType type) {
         final TextView noRecordsFoundView = (TextView)findViewById(R.id.noRecordsFoundText);
-        final View separater = findViewById(R.id.separaterToHide);
+        final List<KeeperEntry> recordList = UpdateManager.getInstance().getStoredEntries(type);
         if (null != recordList && !recordList.isEmpty()) {
             entryListView.setVisibility(View.VISIBLE);
             noRecordsFoundView.setVisibility(View.GONE);
-            separater.setVisibility(View.VISIBLE);
             if (null == entryAdapter) {
                 entryAdapter = new EntryAdapter(this, recordList);
                 entryListView.setAdapter(entryAdapter);
@@ -250,16 +239,63 @@ public final class KeeperListActivity extends BaseKeeperActivity {
         } else {
             entryListView.setVisibility(View.GONE);
             noRecordsFoundView.setVisibility(View.VISIBLE);
-            separater.setVisibility(View.GONE);
+            if (null != type) {
+                switch (type) {
+                    case PERSONAL:
+                        noRecordsFoundView.setText(R.string.text_label_no_record_found_personal);
+                        break;
+                    case PROFESSIONAL:
+                        noRecordsFoundView.setText(R.string.text_label_no_record_found_prof);
+                        break;
+                    default:
+                        noRecordsFoundView.setText(R.string.text_label_no_record_found);
+                        break;
+                }
+            } else {
+                noRecordsFoundView.setText(R.string.text_label_no_record_found);
+            }
         }
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
-        menu.add(Menu.NONE, MENU_VIEW_PROFILE, Menu.NONE, getString(R.string.menu_view_profile));
-        menu.add(Menu.NONE, MENU_EXPORT_DATA, Menu.NONE, getString(R.string.menu_export_data));
-        menu.add(Menu.NONE, MENU_IMPORT_DATA, Menu.NONE, getString(R.string.menu_import_data));
-        menu.add(Menu.NONE, MENU_ABOUT_APP, Menu.NONE, getString(R.string.menu_about_us));
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_keeper_list_view, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_view_profile:
+                Intent profileIntent = new Intent(KeeperListActivity.this, KeeperProfileActivity.class);
+                startActivity(profileIntent);
+                finish();
+                break;
+            case R.id.action_export_data:
+                List<KeeperEntry> storedList = UpdateManager.getInstance().getStoredEntries(null);
+                if (null != storedList && !storedList.isEmpty()) {
+                    promptForPassword(MENU_EXPORT_DATA);
+                } else {
+                    KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_no_data_export));
+                }
+                break;
+            case R.id.action_import_data:
+                promptForPassword(MENU_IMPORT_DATA);
+                break;
+            case R.id.action_security_backup:
+                Log.d("RecoveryOptions", "Update recovery options");
+                promptForPassword(MENU_UPDATE_RECOVERY);
+                break;
+            case R.id.action_about_us:
+                Intent aboutIntent = new Intent(this, AboutAppActivity.class);
+                startActivity(aboutIntent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     /**
@@ -271,38 +307,13 @@ public final class KeeperListActivity extends BaseKeeperActivity {
         finish();
     }
 
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_VIEW_PROFILE:
-                Intent profileIntent = new Intent(KeeperListActivity.this, KeeperProfileActivity.class);
-                startActivity(profileIntent);
-                finish();
-                break;
-            case MENU_EXPORT_DATA:
-                List<KeeperEntry> storedList = UpdateManager.getInstance().getStoredEntries(null);
-                if(null != storedList && !storedList.isEmpty()) {
-                    promptForPassword(true);
-                } else {
-                    KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_no_data_export));
-                }
-                break;
-            case MENU_IMPORT_DATA:
-                promptForPassword(false);
-                break;
-            case MENU_ABOUT_APP:
-                Intent aboutIntent = new Intent(this, AboutAppActivity.class);
-                startActivity(aboutIntent);
-                finish();
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-
+    /**
+     * Initialize data import
+     * @param filePath
+     */
     private void initiateDataImport(final String filePath) {
         File selectedFile = new File(filePath);
-        //Read text from file
+        // Read text from file
         StringBuilder importText = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new FileReader(selectedFile));
@@ -311,13 +322,12 @@ public final class KeeperListActivity extends BaseKeeperActivity {
                 importText.append(line);
             }
             br.close();
+        } catch (IOException e) {
+            Log.d("IOException", "" + Throwables.getStackTraceAsString(e));
         }
-        catch (IOException e) {
-            Log.d("IOException", ""+Throwables.getStackTraceAsString(e));
-        }
-        if(!Strings.isNullOrEmpty(importText.toString()) && UpdateManager.getInstance().importData(importText.toString())) {
+        if (!Strings.isNullOrEmpty(importText.toString()) && UpdateManager.getInstance().importData(importText.toString())) {
             setSelectedMenuBarId(R.id.menuBarAll);
-            initializeEntryList(UpdateManager.getInstance().getStoredEntries(null));
+            initializeEntryList(null);
             KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.text_toast_success_import));
         } else {
             KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.text_toast_failure_import));
@@ -326,30 +336,40 @@ public final class KeeperListActivity extends BaseKeeperActivity {
 
     /**
      * Prompt for password to initiate Import/Export operations.
+     * 
      * @param isExport true if operation is "Export", else false for "Import"
      */
-    private void promptForPassword(final boolean isExport) {
+    private void promptForPassword(final int menuId) {
         final LayoutInflater inflater = this.getLayoutInflater();
         final LinearLayout passwordLayout = (LinearLayout)inflater.inflate(R.layout.layout_password_prompt, null);
-        final EditText enterPassword = (EditText) passwordLayout.findViewById(R.id.enter_password_prompt);
+        final EditText enterPassword = (EditText)passwordLayout.findViewById(R.id.enter_password_prompt);
         final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 KeeperUtils.hideKeyboard(appContext, enterPassword);
                 dialog.dismiss();
                 String token = enterPassword.getText().toString().trim();
-                if(KeeperManager.getInstance().isKeeperTokenValid(token)) {
-                    if(isExport) {
-                        TextFileHelper helper = new TextFileHelper();
-                        if (helper.createTextFile(UpdateManager.getInstance().exportData())) {
-                            KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_export_success) + " "+helper.getFilePathInfo());
-                        } else {
-                            KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_export_failed));
-                        }
-                    } else {
-                        Intent intent = new Intent(appContext, FileBrowserActivity.class);
-                        startActivity(intent);
-                        finish();
+                if (KeeperManager.getInstance().isKeeperTokenValid(token)) {
+                    switch (menuId) {
+                        case MENU_EXPORT_DATA:
+                            TextFileHelper helper = new TextFileHelper();
+                            if (helper.createTextFile(UpdateManager.getInstance().exportData())) {
+                                KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_export_success) + " " + helper.getFilePathInfo());
+                            } else {
+                                KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_export_failed));
+                            }
+                            break;
+                        case MENU_IMPORT_DATA:
+                            Intent intent = new Intent(appContext, FileBrowserActivity.class);
+                            startActivity(intent);
+                            finish();
+                            break;
+                        case MENU_UPDATE_RECOVERY:
+                            Intent recoveryIntent = new Intent(KeeperListActivity.this, PasswordRecoveryActivity.class);
+                            recoveryIntent.putExtra(Configs.KEY_ENTRY_ID, true);
+                            startActivity(recoveryIntent);
+                            finish();
+                            break;
                     }
                 } else {
                     KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_incorrect_token));

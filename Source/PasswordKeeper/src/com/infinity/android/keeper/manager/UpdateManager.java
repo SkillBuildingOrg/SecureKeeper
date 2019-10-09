@@ -6,6 +6,8 @@ package com.infinity.android.keeper.manager;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -161,6 +163,14 @@ public final class UpdateManager extends BaseManager {
             entryList = getGson().fromJson(storedData, TYPE_LIST_ENTRY);
         }
         entryList.add(entry);
+        if(entryList.size() > 1) {
+            Collections.sort(entryList, new Comparator<KeeperEntry>(){
+                @Override
+                public int compare(final KeeperEntry entry1, final KeeperEntry entry2) {
+                    return entry1.getTitle().compareToIgnoreCase(entry2.getTitle());
+                }
+            });
+        }
         getKeeperPrefs().putString(KEEPER_ENTRY_LIST_DATA, getGson().toJson(entryList));
     }
 

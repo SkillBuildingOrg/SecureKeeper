@@ -46,7 +46,7 @@
                 android:gravity="center"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:maxLength="12"
+                android:maxLength="20"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium" >
             </EditText>
@@ -89,7 +89,7 @@
                 android:gravity="center"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:maxLength="12"
+                android:maxLength="20"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium" >
             </EditText>
@@ -121,10 +121,19 @@
                     android:gravity="center"
                     android:hint="@string/hint_confirm_password"
                     android:inputType="textPassword"
-                    android:maxLength="12"
+                    android:maxLength="20"
                     android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceMedium" >
                 </EditText>
+
+                <TextView
+                    android:id="@+id/errorPasswordConfirm"
+                    style="@style/text_small_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dip"
+                    android:text="@string/text_error_confirm_password"
+                    android:textColor="@color/text_error_msg" />
 
                 <Button
                     android:id="@+id/buttonConfirm"

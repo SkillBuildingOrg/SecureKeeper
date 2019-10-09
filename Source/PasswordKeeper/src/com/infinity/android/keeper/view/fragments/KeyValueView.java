@@ -94,6 +94,16 @@ public final class KeyValueView extends LinearLayout {
                 }
             }
         });
+        requestAutoFocus();
+    }
+
+    /**
+     * Request focus for KEY field when added.
+     */
+    public final void requestAutoFocus() {
+        if(null != keyText) {
+            keyText.requestFocus();
+        }
     }
 
     /**

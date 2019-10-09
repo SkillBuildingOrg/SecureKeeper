@@ -49,8 +49,6 @@ public final class SearchKeeperActivity extends BaseKeeperActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final View headerView = KeeperUtils.getPageTitleView(appContext, getString(R.string.hint_search_text));
-        addPageHeaderView(headerView);
         setContentView(R.layout.layout_search_entry);
 
         prevSearchText = Configs.EMPTY_STRING;
@@ -80,6 +78,8 @@ public final class SearchKeeperActivity extends BaseKeeperActivity {
                 updateSearchResults(s.toString().trim());
             }
         });
+
+        KeeperUtils.initActionBar(appContext, R.string.hint_search_text, true);
     }
 
     /**
@@ -261,8 +261,8 @@ public final class SearchKeeperActivity extends BaseKeeperActivity {
                     break;
             }
         } else {
-            selectedSubtype = EntrySubType.OTHER;
-            selectedIndex = 1;
+            selectedSubtype = null;
+            selectedIndex = 0;
         }
         subTypeSpinner.setSelection(selectedIndex);
     }

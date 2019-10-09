@@ -14,7 +14,7 @@
         android:gravity="left|center_vertical"
         android:hint="@string/hint_enter_key"
         android:inputType="textCapWords|textNoSuggestions"
-        android:maxLength="20"
+        android:maxLength="50"
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceSmall" >
     </EditText>
@@ -29,15 +29,14 @@
         android:gravity="left|center_vertical"
         android:hint="@string/hint_enter_value"
         android:inputType="textCapWords|textNoSuggestions"
-        android:maxLength="20"
+        android:maxLength="70"
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceSmall" >
     </EditText>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dip"
-        android:background="@drawable/dotted_line"
-        android:layerType="software" />
+        android:layout_height="1dip"
+        android:background="@color/list_separator_color" />
 
 </LinearLayout>

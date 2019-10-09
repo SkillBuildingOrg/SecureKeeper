@@ -4,6 +4,9 @@
 
 package com.infinity.android.keeper.data.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.base.Strings;
 
 /**
@@ -18,6 +21,7 @@ public final class ProfileInfo {
     private String locationCity;
     private String userMailId;
     private String alternatePhoneNumber;
+    private List<AdditionalInfo> securityQuestionsList;
 
     /**
      * Constructor
@@ -40,6 +44,31 @@ public final class ProfileInfo {
         this.locationState = locationState;
         this.userMailId = userMailId;
         this.alternatePhoneNumber = alternatePhone;
+    }
+
+    public final void resetQuestions() {
+        if(null != securityQuestionsList) {
+            securityQuestionsList.clear();
+        }
+        securityQuestionsList = null;
+    }
+    /**
+     * Add security questions
+     * @param question
+     */
+    public final void addSecurityQuestionInfo(final AdditionalInfo question) {
+        if(null == securityQuestionsList) {
+            securityQuestionsList = new ArrayList<AdditionalInfo>();
+        }
+        securityQuestionsList.add(question);
+    }
+
+    /**
+     * Get list of security questions
+     * @return questionsList
+     */
+    public final List<AdditionalInfo> getSecurityQuestions() {
+        return securityQuestionsList;
     }
 
     /**

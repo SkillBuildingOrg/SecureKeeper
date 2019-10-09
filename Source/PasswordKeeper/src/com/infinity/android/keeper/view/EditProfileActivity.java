@@ -3,6 +3,8 @@
  */
 package com.infinity.android.keeper.view;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.LinearLayout;
 import com.google.common.base.Strings;
 import com.infinity.android.keeper.BaseKeeperActivity;
 import com.infinity.android.keeper.R;
+import com.infinity.android.keeper.data.model.AdditionalInfo;
 import com.infinity.android.keeper.data.model.ProfileInfo;
 import com.infinity.android.keeper.manager.UpdateManager;
 import com.infinity.android.keeper.utils.Configs;
@@ -45,9 +48,8 @@ public final class EditProfileActivity extends BaseKeeperActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.layout_edit_profile);
-        addPageHeaderView(KeeperUtils.getPageTitleView(appContext, getString(R.string.page_edit_profile)));
+
         personalInfoContainer = (LinearLayout) findViewById(R.id.profileInfoContainer);
         locationInfoContainer = (LinearLayout) findViewById(R.id.profileLocationContainer);
 
@@ -118,6 +120,12 @@ public final class EditProfileActivity extends BaseKeeperActivity {
                     country = enterCountry.getText().toString().trim();
 
                     ProfileInfo updatedInfo = new ProfileInfo(userName, userSurname, phoneNumber, country, state, city, emailId, altPhoneNumber);
+                    if(null != info && info.getSecurityQuestions() != null && !info.getSecurityQuestions().isEmpty()) {
+                        List<AdditionalInfo> questionList = info.getSecurityQuestions();
+                        for(AdditionalInfo question : questionList) {
+                            updatedInfo.addSecurityQuestionInfo(question);
+                        }
+                    }
                     UpdateManager.getInstance().updateProfileData(updatedInfo);
 
                     if(isEditMode) {
@@ -132,6 +140,8 @@ public final class EditProfileActivity extends BaseKeeperActivity {
                 }
             }
         });
+
+        KeeperUtils.initActionBar(appContext, R.string.page_edit_profile, true);
     }
 
     @Override

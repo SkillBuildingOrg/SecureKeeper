@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.google.common.base.Strings;
 import com.infinity.android.keeper.BaseKeeperActivity;
 import com.infinity.android.keeper.R;
+import com.infinity.android.keeper.data.model.ProfileInfo;
 import com.infinity.android.keeper.manager.KeeperManager;
+import com.infinity.android.keeper.manager.UpdateManager;
 import com.infinity.android.keeper.utils.Configs;
 import com.infinity.android.keeper.utils.KeeperUtils;
 
@@ -34,15 +36,20 @@ public final class LoginKeeperActivity extends BaseKeeperActivity {
         final EditText enterAccessToken = (EditText) findViewById(R.id.enterPassword);
         final Button loginButton = (Button) findViewById(R.id.buttonLogin);
         final TextView forgotPasswordLink = (TextView) findViewById(R.id.forgotPasswordText);
-
-        forgotPasswordLink.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Intent viewListIntent = new Intent(LoginKeeperActivity.this, ForgetKeeperActivity.class);
-                startActivity(viewListIntent);
-                finish();
-            }
-        });
+        ProfileInfo info = UpdateManager.getInstance().getProfileInformation();
+        if(null != info && null != info.getSecurityQuestions()) {
+            forgotPasswordLink.setVisibility(View.VISIBLE);
+            forgotPasswordLink.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    enterAccessToken.setText(Configs.EMPTY_STRING);
+                    Intent viewListIntent = new Intent(LoginKeeperActivity.this, PasswordRecoveryActivity.class);
+                    startActivity(viewListIntent);
+                    finish();
+                }
+            });
+        }
+        info = null;
 
         enterAccessToken.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,16 +80,20 @@ public final class LoginKeeperActivity extends BaseKeeperActivity {
                     startActivity(viewListIntent);
                     finish();
                 } else {
+                    enterAccessToken.setText(Configs.EMPTY_STRING);
                     KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_incorrect_token));
                 }
             }
         });
+
+        KeeperUtils.initActionBar(appContext, R.string.page_entry_list, false);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         KeeperUtils.updateLoginStatus(false);
+        KeeperManager.getInstance().deleteResetToken();
     }
 
     @Override

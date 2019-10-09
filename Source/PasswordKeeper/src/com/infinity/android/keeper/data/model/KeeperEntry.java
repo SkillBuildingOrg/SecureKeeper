@@ -39,7 +39,7 @@ public final class KeeperEntry {
     public KeeperEntry(final long entryId, final String title, final String description, final String token, final String time, final List<AdditionalInfo> additionalInfoList,
             final String entryType, final String entrySubType) {
         this.entryId = entryId;
-        this.title = title;
+        this.title = !Strings.isNullOrEmpty(title) ? title.trim() : title;
         this.description = description;
         this.secreteKey = token;
         this.modifiedTime = time;
@@ -47,6 +47,7 @@ public final class KeeperEntry {
         this.entryType = entryType;
         this.entrySubType = entrySubType;
     }
+
 
     /**
      * @return the entrySubType

@@ -47,8 +47,20 @@
         android:text="@string/text_about_us_description" />
 
     <TextView
+        android:id="@+id/ratingLinkText"
+        style="@style/text_small_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip"
+        android:paddingTop="15dip"
+        android:singleLine="false"
+        android:text="@string/text_rate_this_app_link"
+        android:textColor="@color/link_text_color" />
+
+    <TextView
         android:id="@+id/policyLinkText"
-        style="@style/text_small_italic"
+        style="@style/text_small_bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

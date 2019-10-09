@@ -83,7 +83,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dip"
+                    android:layout_height="1dip"
                     android:background="@color/separator_color"
                     android:layerType="software" />
 
@@ -113,7 +113,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dip"
+                    android:layout_height="1dip"
                     android:background="@color/separator_color"
                     android:layerType="software" />
 
@@ -143,7 +143,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dip"
+                    android:layout_height="1dip"
                     android:background="@color/separator_color"
                     android:layerType="software" />
 

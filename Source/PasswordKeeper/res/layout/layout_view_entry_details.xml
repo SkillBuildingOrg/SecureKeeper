@@ -39,8 +39,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="@drawable/dotted_line"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
                 android:layerType="software" />
 
             <TextView
@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/viewLastUpdatedText"
-                style="@style/text_medium_normal"
+                style="@style/text_small_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -67,8 +67,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="@drawable/dotted_line"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
                 android:layerType="software" />
 
             <TextView
@@ -96,8 +96,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="@drawable/dotted_line"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
                 android:layerType="software" />
 
             <TextView
@@ -122,12 +122,15 @@
 
             <Button
                 android:id="@+id/buttonViewSecreteKey"
+                style="@style/text_small_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
                 android:layout_marginTop="15dip"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
                 android:text="@string/button_view_secrete_key"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic"
                 android:visibility="visible" />
 
             <LinearLayout
@@ -135,12 +138,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="25dip"
+                android:paddingBottom="10dip"
+                android:paddingTop="15dip"
                 android:visibility="gone" >
 
                 <TextView
                     android:id="@+id/secreteTextLabel"
-                    style="@style/text_medium_bold"
+                    style="@style/text_small_bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -149,22 +153,30 @@
                     android:singleLine="true"
                     android:text="@string/text_secrete_key" />
 
-                <TextView
-                    android:id="@+id/viewSecreteKeyText"
-                    style="@style/text_medium_normal"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/layout_border"
-                    android:gravity="center"
-                    android:padding="5dip"
-                    android:singleLine="false"
-                    android:text="@string/text_label_no_passcode" />
+                    android:background="@android:color/background_dark"
+                    android:orientation="vertical"
+                    android:padding="1dip" >
+
+                    <TextView
+                        android:id="@+id/viewSecreteKeyText"
+                        style="@style/text_medium_normal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:padding="5dip"
+                        android:singleLine="false"
+                        android:text="@string/text_label_no_passcode" />
+                </LinearLayout>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="@drawable/dotted_line"
+                android:layout_height="1dip"
+                android:background="@color/list_separator_color"
                 android:layerType="software" />
         </LinearLayout>
     </ScrollView>

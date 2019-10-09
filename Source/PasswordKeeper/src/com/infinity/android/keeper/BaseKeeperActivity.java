@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.google.common.base.Throwables;
 import com.infinity.android.keeper.utils.KeeperUtils;
+import com.infinity.android.keeper.view.KeeperEntryEditActivity;
 import com.infinity.android.keeper.view.LoginKeeperActivity;
 
 /**
@@ -38,7 +39,6 @@ public abstract class BaseKeeperActivity extends Activity {
         super.onCreate(savedInstanceState);
         appContext = this;
         inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         KeeperUtils.setAppContext(appContext);
         super.setContentView(R.layout.base_layout);
         headerContainerLayout = (RelativeLayout) findViewById(R.id.headerContainer);
@@ -82,7 +82,9 @@ public abstract class BaseKeeperActivity extends Activity {
 
     @Override
     protected void onPause() {
-        isPaused = true;
+        if(!(appContext instanceof KeeperEntryEditActivity)) {
+            isPaused = true;
+        }
         super.onPause();
     }
 

@@ -13,12 +13,12 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,25 +48,53 @@ public final class KeeperEntryDetailsActivity extends BaseKeeperActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_view_entry_details);
 
-        /*
-         * Add header menu
-         */
-        final View headerView = KeeperUtils.getPageTitleView(appContext, getString(R.string.page_entry_details));
-        addPageHeaderView(headerView);
-        final LinearLayout headerMenuContainer = (LinearLayout)headerView.findViewById(R.id.headerMenuContainer);
-        final ImageView menuOptionsImage = KeeperUtils.getHeaderMenuImage(appContext, R.drawable.menu_options);
-        headerMenuContainer.addView(menuOptionsImage);
-        menuOptionsImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                KeeperUtils.hideKeyboard(appContext, v);
-                openContextMenu(v);
-            }
-        });
-        registerForContextMenu(menuOptionsImage);
-
         entryId = getIntent().getLongExtra(Configs.KEY_ENTRY_ID, -1);
         initializeUI(UpdateManager.getInstance().getEntry(entryId));
+
+        KeeperUtils.initActionBar(appContext, R.string.page_entry_details, true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_entry_details_view, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        final LayoutInflater inflater = this.getLayoutInflater();
+        final LinearLayout passwordLayout = (LinearLayout)inflater.inflate(R.layout.layout_password_prompt, null);
+        final EditText enterPassword = (EditText) passwordLayout.findViewById(R.id.enter_password_prompt);
+        final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                KeeperUtils.hideKeyboard(appContext, enterPassword);
+                dialog.dismiss();
+                String token = enterPassword.getText().toString().trim();
+                if(KeeperManager.getInstance().isKeeperTokenValid(token)) {
+                    switch(item.getItemId()) {
+                        case R.id.action_edit_entry:
+                            /*
+                             * Handle edit flow, prompt for password and then edit the entry
+                             */
+                            executeEditEntry(entryId);
+                            break;
+                        case R.id.action_delete_entry:
+                            /*
+                             * Handle Delete flow, prompt for password and then delete the entry
+                             */
+                            executeDeleteEntry(entryId);
+                            break;
+                    }
+                } else {
+                    KeeperUtils.showErrorAlertMessage(appContext, getString(R.string.alert_msg_incorrect_token));
+                }
+            }
+        };
+        KeeperUtils.promptForPassword(appContext, passwordLayout, positiveListener);
+
+        return true;
     }
 
     /**

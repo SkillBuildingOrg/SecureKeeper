@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/headerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:background="@color/theme_header_background"
+    android:gravity="center_vertical"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/headerTitleView"
+        style="@style/text_large_italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:ellipsize="end"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dip"
+        android:singleLine="true"
+        android:textColor="@color/page_header_text_color" />
+
+</RelativeLayout>

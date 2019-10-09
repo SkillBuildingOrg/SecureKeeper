@@ -50,7 +50,6 @@ public final class FileBrowserActivity extends BaseKeeperActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_file_browser);
-        addPageHeaderView(KeeperUtils.getPageTitleView(this, getString(R.string.page_file_backup)));
 
         browseListView = (ListView)findViewById(R.id.browserListView);
         noFilesDirectory = (TextView) findViewById(R.id.noFilesFoundText);
@@ -97,6 +96,8 @@ public final class FileBrowserActivity extends BaseKeeperActivity {
             ArrayList<String> collection = getIntent().getStringArrayListExtra(EXTRA_ACCEPTED_FILE_EXTENSIONS);
             acceptedFileExtensions = collection.toArray(new String[collection.size()]);
         }
+
+        KeeperUtils.initActionBar(appContext, R.string.page_file_backup, true);
     }
 
     @Override

@@ -9,11 +9,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -38,6 +42,8 @@ import com.infinity.android.keeper.BaseKeeperActivity;
 import com.infinity.android.keeper.R;
 import com.infinity.android.keeper.data.model.utils.EntrySubType;
 import com.infinity.android.keeper.data.model.utils.EntryType;
+import com.infinity.android.keeper.view.PasswordRecoveryActivity;
+
 /**
  * @author joshiroh
  */
@@ -53,6 +59,7 @@ public final class KeeperUtils {
 
     /**
      * Update login status
+     * 
      * @param newStatus
      */
     public static final void updateLoginStatus(final boolean newStatus) {
@@ -208,6 +215,42 @@ public final class KeeperUtils {
     }
 
     /**
+     * Show Alert dialog with OK - Cancel Buttons. Provide handling for OK button. On Cancel, dialog will be dismissed.
+     * 
+     * @param context
+     * @param strAlertMsg
+     * @param positivButtonID
+     * @param negativeButtonID
+     * @param okListener
+     * @param cancelListener
+     * @return alert instance
+     */
+    public static final AlertDialog showAlertForRecoveryOptions(final BaseKeeperActivity context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT);
+        builder.setMessage(context.getString(R.string.alert_text_setup_recovery));
+        builder.setPositiveButton(context.getString(R.string.button_ok), new OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                dialog.dismiss();
+                Intent viewListIntent = new Intent(context, PasswordRecoveryActivity.class);
+                viewListIntent.putExtra(Configs.KEY_ENTRY_ID, true);
+                context.startActivity(viewListIntent);
+                context.finish();
+            }
+        });
+        builder.setNegativeButton(context.getString(R.string.button_cancel), new OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
+        return alert;
+    }
+
+    /**
      * Check if given email id is valid format
      * 
      * @param emailId
@@ -247,27 +290,18 @@ public final class KeeperUtils {
         editField.setError(ssbuilder);
     }
 
-    /**
-     * Creates page title view and adds to the given parent Header. It returns the menu view to handle the click events.
-     * 
-     * @param context
-     * @param headerText
-     * @param drawableId
-     * @param clickListener for menu image click on header<br>
-     *            (If drawableId is set then set this listener to handle click events on menuImage)
-     * @return headerLayout
-     */
-    public static final View getPageTitleView(final Context context, final String headerText) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View headerLayout = inflater.inflate(R.layout.layout_page_title, null);
-        TextView headerTextView = (TextView)headerLayout.findViewById(R.id.headerTitleView);
-        headerTextView.setText(headerText);
-        LinearLayout menuButton = (LinearLayout)headerLayout.findViewById(R.id.headerMenuContainer);
-        return headerLayout;
-    }
+    //    public static final View getPageTitleView(final Context context, final String headerText) {
+    //        LayoutInflater inflater = LayoutInflater.from(context);
+    //        View headerLayout = inflater.inflate(R.layout.layout_page_title, null);
+    //        TextView headerTextView = (TextView)headerLayout.findViewById(R.id.headerTitleView);
+    //        headerTextView.setText(headerText);
+    //        LinearLayout menuButton = (LinearLayout)headerLayout.findViewById(R.id.headerMenuContainer);
+    //        return headerLayout;
+    //    }
 
     /**
      * Bottom menu bar for the page.
+     * 
      * @param context
      * @return menuBar
      */
@@ -279,6 +313,7 @@ public final class KeeperUtils {
 
     /**
      * Header menu Image view
+     * 
      * @param context
      * @param drawableId
      * @return
@@ -288,20 +323,21 @@ public final class KeeperUtils {
         menuImage.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         menuImage.setScaleType(ScaleType.CENTER);
         int defaultPadding = (int)context.getResources().getDimension(R.dimen.default_padding);
-        menuImage.setPadding(defaultPadding, 0, defaultPadding/2, 0);
+        menuImage.setPadding(defaultPadding, 0, defaultPadding / 2, 0);
         menuImage.setImageResource(drawableId);
         return menuImage;
     }
 
     /**
      * Get category information string
+     * 
      * @param category
      * @param subType
      * @return info
      */
     public static String getCategoryInfo(final EntryType category, final EntrySubType subType) {
         StringBuilder info = new StringBuilder();
-        if(null != category) {
+        if (null != category) {
             switch (category) {
                 case PERSONAL:
                     info.append(appContext.getString(R.string.spinner_personal));
@@ -311,8 +347,8 @@ public final class KeeperUtils {
                     break;
             }
         }
-        if(null != subType) {
-            if(info.length() > 0) {
+        if (null != subType) {
+            if (info.length() > 0) {
                 info.append(", ");
             }
 
@@ -338,5 +374,50 @@ public final class KeeperUtils {
             }
         }
         return info.toString();
+    }
+
+    /**
+     * Get resource color by dynamic resource name which is specified by calculation.
+     * This is used when data files contain a custom color that decides which resource color should be displayed.
+     * @param resourceName
+     * @return resourceColor
+     */
+    public static final int getColorResourceByName(final String resourceName) {
+        int resourceColor = 0;
+        if(null != appContext) {
+            Resources resources = appContext.getResources();
+            String packageName = resources.getResourcePackageName(R.color.alphabet_0);
+            int resourceId = resources.getIdentifier(resourceName, "color", packageName);
+            if(resourceId > 0) {
+                resourceColor = resources.getColor(resourceId);
+            } else {
+                resourceColor = resources.getColor(R.color.alphabet_z);
+            }
+        }
+        return resourceColor;
+    }
+
+    public static final ActionBar initActionBar(final BaseKeeperActivity context, final int titleResourceId, final boolean showHideBar) {
+        final ViewGroup actionBarLayout = (ViewGroup)context.getLayoutInflater().inflate(R.layout.layout_action_bar, null);
+        TextView titleText = (TextView)actionBarLayout.findViewById(R.id.headerTitleView);
+        titleText.setText(titleResourceId);
+
+        // Set up your ActionBar
+        final ActionBar actionBar = context.getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        actionBar.setCustomView(actionBarLayout);
+        actionBar.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.theme_header_background)));
+
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        if(showHideBar) {
+            actionBar.show();
+        } else {
+            actionBar.hide();
+        }
+
+        return actionBar;
     }
 }

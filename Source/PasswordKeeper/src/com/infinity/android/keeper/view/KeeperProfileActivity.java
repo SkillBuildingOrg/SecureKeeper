@@ -84,6 +84,8 @@ public final class KeeperProfileActivity extends BaseKeeperActivity {
                 confirmEditProfile();
             }
         });
+
+        KeeperUtils.initActionBar(appContext, R.string.page_edit_profile, false);
     }
 
     /**

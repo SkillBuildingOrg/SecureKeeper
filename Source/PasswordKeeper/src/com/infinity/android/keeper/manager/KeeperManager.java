@@ -17,6 +17,8 @@ import com.infinity.android.keeper.utils.KeeperUtils;
 public final class KeeperManager extends BaseManager {
     private static final String KEEPER_LOGIN = "KEEPER+LOGIN";
     private static final String KEEPER_FORGET = "KEEPER+FORGET";
+    private static final String KEEPER_POLICY_VERSION = "KEEPER+UPDATE+POLICY";
+    private static final int CURRENT_POLICY_VERSION = 3;
 
     private static KeeperManager keeperManager;
     private static SecureKeeperPrefs keeperPrefs;
@@ -76,7 +78,7 @@ public final class KeeperManager extends BaseManager {
      */
     public final String createResetToken() {
         SecureKeeperPrefs prefs = getKeeperPrefs();
-        String currentToken = KEEPER_LOGIN + prefs.getString(KEEPER_LOGIN, Configs.EMPTY_STRING);
+        String currentToken = UpdateManager.getInstance().getNewEntryId() + prefs.getString(KEEPER_LOGIN, Configs.EMPTY_STRING);
         prefs.putString(KEEPER_FORGET, currentToken);
         return prefs.toKey(currentToken);
     }
@@ -107,5 +109,21 @@ public final class KeeperManager extends BaseManager {
      */
     public final boolean isKeeperConfigured() {
         return (null != getKeeperPrefs().getString(KEEPER_LOGIN, null));
+    }
+
+    /**
+     * Check if the user is using latest privacy policy updates.
+     * @return isUpdated
+     */
+    public final boolean isUsingUpdatedPolicy() {
+        int currentVersion = getKeeperPrefs().getInt(KEEPER_POLICY_VERSION, 1);
+        return currentVersion == CURRENT_POLICY_VERSION;
+    }
+
+    /**
+     * Set current in use policy to latest one.
+     */
+    public final void setUpdatedPolicyInUse() {
+        getKeeperPrefs().putInt(KEEPER_POLICY_VERSION, CURRENT_POLICY_VERSION);
     }
 }

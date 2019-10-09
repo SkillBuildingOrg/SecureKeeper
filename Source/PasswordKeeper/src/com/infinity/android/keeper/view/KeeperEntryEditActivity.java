@@ -12,13 +12,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -50,6 +52,8 @@ public final class KeeperEntryEditActivity extends BaseKeeperActivity {
     private long recordedEntryId = -1;
     private List<AdditionalInfo> additionalInfoList;
     private int infoCounter = 0;
+    private EditText enterTitleText;
+    private LinearLayout listKeyValueLayout;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -67,32 +71,13 @@ public final class KeeperEntryEditActivity extends BaseKeeperActivity {
         setContentView(R.layout.layout_edit_entry);
         final int titleTextResourceId = (entryUpdateType == EntryUpdateType.EDIT_ENTRY ? R.string.page_edit_entry : R.string.page_add_new_entry);
 
-        final View headerView = KeeperUtils.getPageTitleView(appContext, getString(titleTextResourceId));
-        addPageHeaderView(headerView);
-        final LinearLayout headerMenuContainer = (LinearLayout)headerView.findViewById(R.id.headerMenuContainer);
-        final ImageView saveEntryImageView = KeeperUtils.getHeaderMenuImage(appContext, R.drawable.menu_save);
-        headerMenuContainer.addView(saveEntryImageView);
-
-        final EditText enterTitleText = (EditText)findViewById(R.id.enterEntryTitle);
+        enterTitleText = (EditText)findViewById(R.id.enterEntryTitle);
         final EditText enterDescriptionText = (EditText)findViewById(R.id.enterDescription);
         final EditText enterPasscodeText = (EditText)findViewById(R.id.enterEntryPasscode);
         final Button buttonSaveEntry = (Button)findViewById(R.id.buttonSaveEntry);
-        final LinearLayout listKeyValueLayout = (LinearLayout)findViewById(R.id.keyValueListContainer);
+        listKeyValueLayout = (LinearLayout)findViewById(R.id.keyValueListContainer);
         final Spinner categorySpinner = (Spinner)findViewById(R.id.spinnerEntryCategory);
         final Spinner subTypeSpinner = (Spinner)findViewById(R.id.spinnerEntrySubtype);
-
-        saveEntryImageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                KeeperUtils.hideKeyboard(appContext, enterTitleText);
-                if(!Strings.isNullOrEmpty(titleValue) && titleValue.length() >= Configs.MIN_TOKEN_LENGTH) {
-                    saveEditedEntry(listKeyValueLayout);
-                } else {
-                    KeeperUtils.showErrorInEditText(enterTitleText, getString(R.string.alert_blankormin_chars_field));
-                    enterTitleText.requestFocus();
-                }
-            }
-        });
 
         if (null != keeperEntry) {
             titleValue = keeperEntry.getTitle();
@@ -162,8 +147,7 @@ public final class KeeperEntryEditActivity extends BaseKeeperActivity {
         buttonSaveEntry.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                KeeperUtils.hideKeyboard(appContext, enterTitleText);
-                saveEditedEntry(listKeyValueLayout);
+                handleSaveAction();
             }
         });
 
@@ -182,7 +166,7 @@ public final class KeeperEntryEditActivity extends BaseKeeperActivity {
             }
         }
 
-        if(infoCounter < 15) {
+        if (infoCounter < 15) {
             infoCounter++;
             listKeyValueLayout.addView(new KeyValueView(this, new EntryUpdateListener() {
                 @Override
@@ -199,12 +183,12 @@ public final class KeeperEntryEditActivity extends BaseKeeperActivity {
             public void onClick(final View v) {
                 buttonAddMore.setVisibility(View.GONE);
                 KeeperUtils.hideKeyboard(appContext, enterTitleText);
-                if(infoCounter < 15) {
+                if (infoCounter < 15) {
                     infoCounter++;
                     listKeyValueLayout.addView(new KeyValueView(appContext, new EntryUpdateListener() {
                         @Override
                         public boolean updateState(final boolean isTextAdded) {
-                            if(infoCounter >= 15) {
+                            if (infoCounter >= 15) {
                                 buttonAddMore.setVisibility(View.GONE);
                             } else {
                                 buttonAddMore.setVisibility(isTextAdded ? View.VISIBLE : View.GONE);
@@ -215,10 +199,41 @@ public final class KeeperEntryEditActivity extends BaseKeeperActivity {
                 }
             }
         });
+        enterTitleText.requestFocus();
+
+        KeeperUtils.initActionBar(appContext, titleTextResourceId, true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_edit_entry, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_save_entry:
+                handleSaveAction();
+                break;
+        }
+        return true;
+    }
+
+    private void handleSaveAction() {
+        KeeperUtils.hideKeyboard(appContext, enterTitleText);
+        if (!Strings.isNullOrEmpty(titleValue) && titleValue.length() >= Configs.MIN_TOKEN_LENGTH) {
+            saveEditedEntry(listKeyValueLayout);
+        } else {
+            KeeperUtils.showErrorInEditText(enterTitleText, getString(R.string.alert_blankormin_chars_field));
+            enterTitleText.requestFocus();
+        }
     }
 
     /**
      * Save edited entry
+     * 
      * @param infoLayout
      * @return isSuccess
      */
@@ -237,8 +252,9 @@ public final class KeeperEntryEditActivity extends BaseKeeperActivity {
             }
         }
 
-        KeeperEntry newEntry = new KeeperEntry(entryId, titleValue, descriptionValue, secreteKeyValue, KeeperUtils.getCurrentTime(), newInfoList, categoryType
-                .getTypeString(), entrySubtype.getTypeString());
+        KeeperEntry newEntry = new KeeperEntry(entryId, titleValue, descriptionValue, secreteKeyValue, KeeperUtils.getCurrentTime(), newInfoList, categoryType.getTypeString(),
+                entrySubtype.getTypeString());
+
         if (entryUpdateType == EntryUpdateType.EDIT_ENTRY) {
             updateManager.modifyExistingEntry(recordedEntryId, newEntry);
         } else {

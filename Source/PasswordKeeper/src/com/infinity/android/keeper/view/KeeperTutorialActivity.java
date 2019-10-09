@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.infinity.android.keeper.BaseKeeperActivity;
 import com.infinity.android.keeper.R;
+import com.infinity.android.keeper.manager.KeeperManager;
+import com.infinity.android.keeper.utils.KeeperUtils;
 
 /**
  * @author joshiroh
@@ -29,6 +31,7 @@ public final class KeeperTutorialActivity extends BaseKeeperActivity {
         continueButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
+                KeeperManager.getInstance().setUpdatedPolicyInUse();
                 Intent configIntent = new Intent(KeeperTutorialActivity.this, EditProfileActivity.class);
                 startActivity(configIntent);
                 finish();
@@ -43,6 +46,8 @@ public final class KeeperTutorialActivity extends BaseKeeperActivity {
                 startActivity(privacyIntent);
             }
         });
+
+        KeeperUtils.initActionBar(appContext, R.string.page_entry_list, false);
     }
 
     /* (non-Javadoc)

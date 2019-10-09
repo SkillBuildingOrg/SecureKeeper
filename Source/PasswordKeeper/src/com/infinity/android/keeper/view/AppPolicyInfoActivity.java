@@ -27,9 +27,6 @@ public final class AppPolicyInfoActivity extends BaseKeeperActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_policy_info);
 
-        final View headerView = KeeperUtils.getPageTitleView(appContext, getString(R.string.page_policy_info));
-        addPageHeaderView(headerView);
-
         String fileName = "file:///android_asset/legal/privacy_policy.html";
 
         WebView webView = (WebView)findViewById(R.id.legal_content_view);
@@ -48,6 +45,8 @@ public final class AppPolicyInfoActivity extends BaseKeeperActivity {
             }
         });
         webView.setLongClickable(false);
+
+        KeeperUtils.initActionBar(appContext, R.string.page_policy_info, true);
     }
 
     @Override

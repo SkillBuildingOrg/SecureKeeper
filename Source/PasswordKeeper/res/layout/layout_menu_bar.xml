@@ -3,6 +3,7 @@
     android:id="@+id/menuBarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/theme_menubar_background"
     android:gravity="center_vertical"
     android:orientation="vertical" >
 

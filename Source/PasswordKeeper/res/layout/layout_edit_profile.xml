@@ -100,7 +100,7 @@
                     android:gravity="left|center_vertical"
                     android:hint="@string/hint_required"
                     android:inputType="textEmailAddress"
-                    android:maxLength="40"
+                    android:maxLength="50"
                     android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceSmall" >
                 </EditText>
@@ -190,7 +190,7 @@
                     android:gravity="left|center_vertical"
                     android:hint="@string/hint_optional"
                     android:inputType="textCapWords|textPostalAddress"
-                    android:maxLength="20"
+                    android:maxLength="30"
                     android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceSmall" >
                 </EditText>
@@ -214,7 +214,7 @@
                     android:gravity="left|center_vertical"
                     android:hint="@string/hint_optional"
                     android:inputType="textCapWords|textPostalAddress"
-                    android:maxLength="20"
+                    android:maxLength="30"
                     android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceSmall" >
                 </EditText>
@@ -238,7 +238,7 @@
                     android:gravity="left|center_vertical"
                     android:hint="@string/hint_optional"
                     android:inputType="textCapWords|textPostalAddress"
-                    android:maxLength="20"
+                    android:maxLength="30"
                     android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceSmall" >
                 </EditText>

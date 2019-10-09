@@ -3,7 +3,7 @@
     android:id="@+id/mainBaseLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/page_bg" >
+    android:background="@color/theme_page_bg_color" >
 
     <RelativeLayout
         android:id="@+id/headerContainer"
@@ -18,7 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headerContainer"
-        android:background="@color/theme_menubar_background"
         android:orientation="horizontal"
         android:visibility="gone" >
     </LinearLayout>

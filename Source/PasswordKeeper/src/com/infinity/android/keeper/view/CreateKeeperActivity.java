@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.common.base.Strings;
 import com.infinity.android.keeper.BaseKeeperActivity;
@@ -105,6 +106,7 @@ public final class CreateKeeperActivity extends BaseKeeperActivity {
         });
 
         final EditText confirmAccessCode = (EditText)findViewById(R.id.confirmPassword);
+        final TextView errorPasswordConfirm = (TextView) findViewById(R.id.errorPasswordConfirm);
         confirmAccessCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
@@ -122,7 +124,10 @@ public final class CreateKeeperActivity extends BaseKeeperActivity {
                 final boolean isEnabled = !Strings.isNullOrEmpty(accessToken) && token.equals(accessToken);
                 confirmButton.setEnabled(isEnabled);
                 if(isEnabled) {
+                    errorPasswordConfirm.setVisibility(View.GONE);
                     KeeperUtils.hideKeyboard(appContext, confirmAccessCode);
+                } else {
+                    errorPasswordConfirm.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -154,6 +159,8 @@ public final class CreateKeeperActivity extends BaseKeeperActivity {
                 finish();
             }
         });
+
+        KeeperUtils.initActionBar(appContext, R.string.page_entry_list, false);
     }
 
     @Override

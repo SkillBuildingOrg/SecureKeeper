@@ -28,8 +28,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dip"
-        android:background="@drawable/dotted_line"
-        android:layerType="software" />
+        android:layout_height="1dip"
+        android:background="@color/list_separator_color" />
 
 </LinearLayout>

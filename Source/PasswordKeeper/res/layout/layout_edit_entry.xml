@@ -78,7 +78,7 @@
             android:gravity="left|center_vertical"
             android:hint="@string/hint_enter_title"
             android:inputType="textCapWords|textNoSuggestions"
-            android:maxLength="20"
+            android:maxLength="40"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceSmall" >
         </EditText>
@@ -103,7 +103,7 @@
             android:gravity="left|center_vertical"
             android:hint="@string/hint_enter_passcode"
             android:inputType="textVisiblePassword"
-            android:maxLength="25"
+            android:maxLength="30"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceSmall" >
         </EditText>
@@ -129,6 +129,7 @@
 
         <Button
             android:id="@+id/btnTextAddMoreInfo"
+            style="@style/text_small_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
@@ -168,6 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:enabled="false"
+            android:gravity="center"
             android:text="@string/button_save"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold"

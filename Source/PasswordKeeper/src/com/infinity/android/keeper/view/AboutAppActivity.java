@@ -3,9 +3,11 @@
  */
 package com.infinity.android.keeper.view;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,9 +29,6 @@ public final class AboutAppActivity extends BaseKeeperActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_about_us);
-
-        final View headerView = KeeperUtils.getPageTitleView(appContext, getString(R.string.page_about_us));
-        addPageHeaderView(headerView);
 
         final TextView appVersionInfo = (TextView) findViewById(R.id.appVersionInfo);
         PackageInfo pInfo = null;
@@ -53,6 +52,28 @@ public final class AboutAppActivity extends BaseKeeperActivity {
                 finish();
             }
         });
+
+        final TextView ratingLinkText = (TextView) findViewById(R.id.ratingLinkText);
+        ratingLinkText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Uri uri = Uri.parse("market://details?id=" + appContext.getPackageName());
+                Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                // To count with Play market backstack, After pressing back button,
+                // to taken back to our application, we need to add following flags to intent.
+                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                        Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET |
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                try {
+                    startActivity(goToMarket);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/apps/details?id=" + appContext.getPackageName())));
+                }
+            }
+        });
+
+        KeeperUtils.initActionBar(appContext, R.string.page_about_us, true);
     }
 
     @Override

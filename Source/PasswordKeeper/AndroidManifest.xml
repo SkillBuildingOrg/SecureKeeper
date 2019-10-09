@@ -1,10 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.infinity.android.keeper"
-    android:versionCode="102"
-    android:versionName="1.0.0" >
+    android:versionCode="201"
+    android:versionName="2.0.1" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
     <supports-screens
         android:anyDensity="true"
@@ -14,7 +18,7 @@
         android:xlargeScreens="true" />
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <supports-screens
@@ -53,6 +57,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -60,6 +65,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -67,6 +73,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -74,6 +81,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -81,6 +89,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -88,6 +97,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -95,6 +105,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -102,6 +113,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -109,6 +121,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -116,6 +129,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -123,6 +137,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -130,6 +145,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -137,6 +153,7 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
@@ -144,6 +161,15 @@
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.infinity.android.keeper.view.PasswordRecoveryActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
     </application>
